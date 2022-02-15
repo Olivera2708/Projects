@@ -1,3 +1,6 @@
+//Program je pisan u aprilu 2020. godine
+//Slaganje Rubikove kocke metodom koja se koristi za slaganje Rubikove kocke na slepo
+
 #include <stdio.h>
 #include <stdlib.h>
 
