@@ -143,4 +143,4 @@ for event in events:
 
         #save
         # filename = event.replace(" ", "")
-        # img.save(f"Nametags//{i}_{filename}.png")
+        # img.save(f"{i}_{filename}.png")
