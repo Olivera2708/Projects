@@ -32,7 +32,7 @@ organizers = [name.getText().replace("\n", "").strip() for name in all_organizer
 organizers = [name for name in organizers if name != "" and "and" not in name and "," not in name and name not in delegates]
 
 
-#dobavljenje imena i drzava
+#get names, countries, ids
 response = requests.get(URL_reg)
 html = response.text
 
@@ -43,10 +43,16 @@ all_names = soup.find_all(class_ = "name")
 names = [name.getText().replace("\n", "").strip() for name in all_names]
 names = names[1:]
 
-
 #get ids
-ids = [element.find("a")["href"].split("/")[-1] for element in all_names if element.find("a") != None]
-
+ids = []
+for element in all_names:
+    el = element.find("a")
+    if el == None:
+        ids.append("")
+    else:
+        id = el["href"].split("/")[-1]
+        ids.append(id)
+ids = ids[1::]
 
 #get all countries
 all_countries = soup.find_all(class_ = "country")
@@ -62,9 +68,8 @@ for el in list(dict.fromkeys(countries)):
     soup = BeautifulSoup(html, "html.parser")
     link = soup.find("img", {"alt": f"Flag of {el}"})["src"]
     flags_dict[el] = f"https:{link}"
-print(flags_dict)
 
-#pisanje
+#fonts
 fontname = ImageFont.truetype(font, 150)
 fontcountry = ImageFont.truetype(font, 120)
 fontid = ImageFont.truetype(font, 100)
@@ -84,8 +89,10 @@ for i in range(len(names)):
 
     #name
     draw.text((x/2, y/2), names[i], font=fontname, fill=(0, 0, 0), anchor="mm")
+
     #country text
     #draw.text((x/2, y/2 + 150), countries[i], font=fontcountry, fill=(0, 0, 0), anchor="mm")
+
     #id
     #draw.text((x/2, y/2 + 150), ids[i], font=fontid, fill=(0, 0, 0), anchor="mm")
 
