@@ -38,6 +38,10 @@ html = response.text
 
 soup = BeautifulSoup(html, "html.parser")
 
+#competition name
+comp_name = soup.find("h3").getText().strip()
+nation = comp_name.split(" ")[0]
+
 #get all names
 all_names = soup.find_all(class_ = "name")
 names = [name.getText().replace("\n", "").strip() for name in all_names]
@@ -73,6 +77,7 @@ for el in list(dict.fromkeys(countries)):
 fontname = ImageFont.truetype(font, 150)
 fontcountry = ImageFont.truetype(font, 120)
 fontid = ImageFont.truetype(font, 100)
+fontmain = ImageFont.truetype(font, 120)
 
 for i in range(len(names)):
     img = Image.open(image)
@@ -86,6 +91,9 @@ for i in range(len(names)):
             img.paste(flag_img, (int((x-x_new)/2), int(y/2 + 100)))
 
     draw = ImageDraw.Draw(img)
+
+    #comp name
+    #draw.text((x/2, y/2 - 340), comp_name, font=fontmain, fill=(255, 255, 255), anchor="mm")
 
     #name
     draw.text((x/2, y/2), names[i], font=fontname, fill=(0, 0, 0), anchor="mm")
