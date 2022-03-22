@@ -72,7 +72,7 @@ def gui():
     font_input = Entry(width=30)
     font_input.grid(column=2, row=5, columnspan=2)
 
-    title_text = Label(text = "Title: ")
+    title_text = Label(text = "Title position: ")
     title_text.grid(column=1, row=6)
 
     title_input = Entry(width=30)
@@ -86,28 +86,21 @@ def gui():
     title_size.grid(column=2, row=7, columnspan=2)
     title_size.insert(0, 160)
 
-    title_text1 = Label(text = "Title size: ")
-    title_text1.grid(column=1, row=7)
-
-    title_size = Entry(width=30)
-    title_size.grid(column=2, row=7, columnspan=2)
-    title_size.insert(0, 160)
-
-    general_text = Label(text = "General text: ")
+    general_text = Label(text = "Main text position: ")
     general_text.grid(column=1, row=8)
 
     general_input = Entry(width=30)
     general_input.grid(column=2, row=8, columnspan=2)
     general_input.insert(0, -100)
 
-    general_text1 = Label(text = "General text size: ")
+    general_text1 = Label(text = "Main text size: ")
     general_text1.grid(column=1, row=9)
 
     general_size = Entry(width=30)
     general_size.grid(column=2, row=9, columnspan=2)
     general_size.insert(0, 60)
 
-    event_text = Label(text = "Event text: ")
+    event_text = Label(text = "Event text position: ")
     event_text.grid(column=1, row=10)
 
     event_input = Entry(width=30)
@@ -121,7 +114,7 @@ def gui():
     event_size.grid(column=2, row=11, columnspan=2)
     event_size.insert(0, 55)
 
-    place_text = Label(text = "Place text: ")
+    place_text = Label(text = "Place text position: ")
     place_text.grid(column=1, row=12)
 
     place_input = Entry(width=30)
