@@ -37,25 +37,60 @@ response = requests.get(URL_reg)
 html = response.text
 
 soup = BeautifulSoup(html, "html.parser")
-all_names = soup.findAll(class_ = "name")
+
+#get all names
+all_names = soup.find_all(class_ = "name")
 names = [name.getText().replace("\n", "").strip() for name in all_names]
 names = names[1:]
 
+
+#get ids
+ids = [element.find("a")["href"].split("/")[-1] for element in all_names if element.find("a") != None]
+
+
+#get all countries
 all_countries = soup.find_all(class_ = "country")
 countries = [country.getText().replace("\n", "").strip() for country in all_countries]
 countries = countries[1::]
 
+
+flags_dict = {}
+#flags
+for el in list(dict.fromkeys(countries)):
+    response = requests.get(f"https://en.wikipedia.org/wiki/{el}")
+    html = response.text
+    soup = BeautifulSoup(html, "html.parser")
+    link = soup.find("img", {"alt": f"Flag of {el}"})["src"]
+    flags_dict[el] = f"https:{link}"
+print(flags_dict)
+
 #pisanje
 fontname = ImageFont.truetype(font, 150)
 fontcountry = ImageFont.truetype(font, 120)
+fontid = ImageFont.truetype(font, 100)
 
 for i in range(len(names)):
     img = Image.open(image)
-    draw = ImageDraw.Draw(img)
     x, y = img.size
 
-    draw.text((x/2, y/2 + 150), countries[i], font=fontcountry, fill=(0, 0, 0), anchor="mm")
+    #flag
+    for key, value in flags_dict.items():
+        if key == countries[i]:
+            flag_img = Image.open(requests.get(value, stream=True).raw)
+            x_new, y_new = flag_img.size
+            img.paste(flag_img, (int((x-x_new)/2), int(y/2 + 100)))
+
+    draw = ImageDraw.Draw(img)
+
+    #name
     draw.text((x/2, y/2), names[i], font=fontname, fill=(0, 0, 0), anchor="mm")
+    #country text
+    #draw.text((x/2, y/2 + 150), countries[i], font=fontcountry, fill=(0, 0, 0), anchor="mm")
+    #id
+    #draw.text((x/2, y/2 + 150), ids[i], font=fontid, fill=(0, 0, 0), anchor="mm")
+
+
+    #competitor, delegate or organizer
     if names[i] in delegates:
         draw.text((x/2, y/2 + 350), "delegate", font=fontcountry, fill=(204, 0, 0), anchor="mm")
     elif names[i] in organizers:
