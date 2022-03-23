@@ -9,11 +9,11 @@ You need to download nametag_gui.py, certificate_gui.py and requirements.txt and
 Add whatever font you like in the same folder as those three files (it needs to be .ttf).
 Add picture of name tag and certificate that you want to use for competition.
 
-Step 1
+# Step 1
 Open terminal inside that folder and write:
   `pip install -r requirements.txt`
 
-Step 2
+# Step 2
 Run one of the scripts with `python3 nametag_gui.py` or `python3 certificate_gui.py`.
   
 Step 3
@@ -31,4 +31,4 @@ Change parameters as needed.
 Step 6
 When you are done press button "Export".
 
-**If something is not working check all parameters there is some invalid input.**
+**If something is not working check all parameters, because there is some invalid input.**
