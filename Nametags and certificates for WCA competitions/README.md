@@ -31,3 +31,5 @@ Change parameters as needed.
 
 Step 6
 When you are done press button "Export".
+
+**If something is not working check all parameters there is some invalid input.**
