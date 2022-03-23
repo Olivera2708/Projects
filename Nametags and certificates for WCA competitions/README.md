@@ -1,6 +1,6 @@
-Python scripts are used for WCA competition, first scrip is for generating certificates, second script is for generating name tags
+### Python scripts are used for WCA competition, first scrip is for generating certificates, second script is for generating name tags
 
-HOW TO USE
+## HOW TO USE
 
 You need to download nametag_gui.py, certificate_gui.py and requirements.txt and put them in the same folder.
 Add whatever font you like in the same folder as those three files (it needs to be .ttf).
