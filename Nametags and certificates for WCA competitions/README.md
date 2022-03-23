@@ -13,12 +13,12 @@ Open terminal inside that folder and write:
 Step 2
 Run one of the scripts
 (you can run it by using:
-  python3 nametag_gui.py
+  _python3 nametag_gui.py_
   or
-  python3 certificate_gui.py)
+  _python3 certificate_gui.py_)
   
 Step 3
-Enter copmetition name or if that does not work enter url of the competition
+Enter competition name or if that does not work enter url of the competition
 Enter your image name
 Enter font name
 
