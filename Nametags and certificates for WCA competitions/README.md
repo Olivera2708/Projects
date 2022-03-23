@@ -15,9 +15,9 @@ Open terminal inside that folder and write:
 Step 2
 Run one of the scripts
 (you can run it by using:
-  _python3 nametag_gui.py_
+  > python3 nametag_gui.py
   or
-  _python3 certificate_gui.py_).
+  > python3 certificate_gui.py).
   
 Step 3
 Enter competition name or if that does not work enter url of the competition.
