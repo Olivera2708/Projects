@@ -10,8 +10,11 @@ def show_example():
     all_good = True
     global URL, image, font
     if URL_input.get():
-        name = URL_input.get().replace(" ", "")
-        URL = f"https://www.worldcubeassociation.org/competitions/{name}"
+        if "https://" in URL_input.get():
+            URL = URL_input.get()
+        else:
+            name = URL_input.get().replace(" ", "").replace("'", "").replace("&", "").replace("-", "")
+            URL = f"https://www.worldcubeassociation.org/competitions/{name}"
     else:
         all_good = False
     if image_input.get():
@@ -30,8 +33,11 @@ def show_example():
 def button_export():
     global URL, image, font
     if URL_input.get():
-        name = URL_input.get().replace(" ", "")
-        URL = f"https://www.worldcubeassociation.org/competitions/{name}"
+        if "https://" in URL_input.get():
+            URL = URL_input.get()
+        else:
+            name = URL_input.get().replace(" ", "").replace("'", "").replace("&", "").replace("-", "")
+            URL = f"https://www.worldcubeassociation.org/competitions/{name}"
     if image_input.get():
         image = image_input.get()
     if font_input.get():
@@ -54,7 +60,7 @@ def gui():
     space = Label(text="")
     space.grid(column=1, row=2)
 
-    URL_text = Label(text = "Competition name: ")
+    URL_text = Label(text = "Competition name or url: ")
     URL_text.grid(column=1, row=3)
 
     URL_input = Entry(width=30)
@@ -170,7 +176,6 @@ def get_data():
         else:
             #competition name
             comp_name = soup.find("h3").getText().strip()
-            nation = comp_name.split(" ")[0]
 
             #place
             city = soup.find("dt", text="City").findNext("dd").getText().split(",")[0]
@@ -215,12 +220,19 @@ def get_data():
             date = f"{datu} {dat}, {all_date[-1]}."
 
             #get all delegates
-            all_delegates = soup.find("dt", text="WCA Delegates").findNext("dd")
+            try:
+                all_delegates = soup.find("dt", text="WCA Delegates").findNext("dd")
+            except:
+                all_delegates = soup.find("dt", text="WCA Delegate").findNext("dd")
+
             delegates = [name.getText().replace("\n", "").strip() for name in all_delegates]
             delegates = [name for name in delegates if name != "" and "and" not in name and "," not in name]
 
             #get all organizers except delegates
-            all_organizers = soup.find("dt", text="Organizers").findNext("dd")
+            try:
+                all_organizers = soup.find("dt", text="Organizers").findNext("dd")
+            except:
+                all_organizers = soup.find("dt", text="Organizer").findNext("dd")
             organizers = [name.getText().replace("\n", "").strip() for name in all_organizers]
             organizers = [name for name in organizers if name != "" and "and" not in name and "," not in name and name not in delegates]
 
