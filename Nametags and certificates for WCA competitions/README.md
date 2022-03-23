@@ -11,7 +11,7 @@ Add picture of name tag and certificate that you want to use for competition.
 
 Step 1
 Open terminal inside that folder and write:
-  > pip install -r requirements.txt
+  `pip install -r requirements.txt`
 
 Step 2
 Run one of the scripts:
