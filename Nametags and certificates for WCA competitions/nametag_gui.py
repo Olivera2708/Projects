@@ -13,8 +13,11 @@ def show_example():
     all_good = True
     global URL, image, font
     if URL_input.get():
-        name = URL_input.get().replace(" ", "")
-        URL = f"https://www.worldcubeassociation.org/competitions/{name}"
+        if "https://" in URL_input.get():
+            URL = URL_input.get()
+        else:
+            name = URL_input.get().replace(" ", "").replace("'", "").replace("&", "").replace("-", "")
+            URL = f"https://www.worldcubeassociation.org/competitions/{name}"
         URL_reg = f"{URL}/registrations"
     else:
         all_good = False
@@ -36,8 +39,11 @@ def button_export():
 
     global URL, image, font
     if URL_input.get():
-        name = URL_input.get().replace(" ", "")
-        URL = f"https://www.worldcubeassociation.org/competitions/{name}"
+        if "https://" in URL_input.get():
+            URL = URL_input.get()
+        else:
+            name = URL_input.get().replace(" ", "").replace("'", "").replace("&", "").replace("-", "")
+            URL = f"https://www.worldcubeassociation.org/competitions/{name}"
         URL_reg = f"{URL}/registrations"
     if image_input.get():
         image = image_input.get()
@@ -62,7 +68,7 @@ def gui():
     space.grid(column=1, row=2)
 
     have_name_comp = IntVar()
-    C6 = Checkbutton(text = "Competition name: ", variable = have_name_comp, \
+    C6 = Checkbutton(text = "Competition name or url: ", variable = have_name_comp, \
                      onvalue = 1, offvalue = 0)
     C6.grid(column=1, row=3)
 
@@ -227,12 +233,18 @@ def get_data():
     soup = BeautifulSoup(html, "html.parser")
 
     #get all delegates
-    all_delegates = soup.find("dt", text="WCA Delegates").findNext("dd")
+    try:
+        all_delegates = soup.find("dt", text="WCA Delegates").findNext("dd")
+    except:
+        all_delegates = soup.find("dt", text="WCA Delegate").findNext("dd")
     delegates = [name.getText().replace("\n", "").strip() for name in all_delegates]
     delegates = [name for name in delegates if name != "" and "and" not in name and "," not in name]
 
     #get all organizers except delegates
-    all_organizers = soup.find("dt", text="Organizers").findNext("dd")
+    try:
+        all_organizers = soup.find("dt", text="Organizers").findNext("dd")
+    except:
+        all_organizers = soup.find("dt", text="Organizer").findNext("dd")
     organizers = [name.getText().replace("\n", "").strip() for name in all_organizers]
     organizers = [name for name in organizers if name != "" and "and" not in name and "," not in name and name not in delegates]
 
@@ -267,15 +279,21 @@ def get_data():
     countries = [country.getText().replace("\n", "").strip() for country in all_countries]
     countries = countries[1::]
 
-
-    flags_dict = {}
-    #flags
-    for el in list(dict.fromkeys(countries)):
-        response = requests.get(f"https://en.wikipedia.org/wiki/{el}")
-        html = response.text
-        soup = BeautifulSoup(html, "html.parser")
-        link = soup.find("img", {"alt": f"Flag of {el}"})["src"]
-        flags_dict[el] = f"https:{link}"
+    if flag_c.get() == 1:
+        flags_dict = {}
+        #flags
+        for el in list(dict.fromkeys(countries)):
+            response = requests.get(f"https://en.wikipedia.org/wiki/{el}")
+            html = response.text
+            soup = BeautifulSoup(html, "html.parser")
+            try:
+                link = soup.find("img", {"alt": f"Flag of {el}"})["src"]
+            except:
+                try:
+                    link = soup.find("img", {"alt": f"Flag of the {el}"})["src"]
+                except:
+                    link = soup.find("a", {"title": f"Flag of {el}"}).find("img")["src"]
+            flags_dict[el] = f"https:{link}"
 
 def preview():
     #fonts
@@ -300,27 +318,27 @@ def preview():
     #comp name
     if have_name_comp.get() == 1:
         colour = (int(comp_r.get()), int(comp_g.get()), int(comp_b.get()))
-        draw.text((x//2, y//2 + int(comp_input.get())), comp_name, font=fontmain, fill=colour, anchor="mm")
+        draw.text((x//2, y//2 + int(comp_input.get())), comp_name.upper(), font=fontmain, fill=colour, anchor="mm")
 
     #name
-    draw.text((x//2, y//2 + int(pers_input.get())), names[0], font=fontname, fill=(0, 0, 0), anchor="mm")
+    draw.text((x//2, y//2 + int(pers_input.get())), names[0].upper(), font=fontname, fill=(0, 0, 0), anchor="mm")
 
     #country text
     if country_c.get() == 1:
-        draw.text((x//2, y//2 + int(country_input.get())), countries[0], font=fontcountry, fill=(0, 0, 0), anchor="mm")
+        draw.text((x//2, y//2 + int(country_input.get())), countries[0].upper(), font=fontcountry, fill=(0, 0, 0), anchor="mm")
 
     #id
     if wcaid_c.get() == 1:
-        draw.text((x//2, y//2 + int(wcaid_input.get())), ids[0], font=fontid, fill=(0, 0, 0), anchor="mm")
+        draw.text((x//2, y//2 + int(wcaid_input.get())), ids[0].upper(), font=fontid, fill=(0, 0, 0), anchor="mm")
 
     #competitor, delegate or organizer
     if type_c.get() == 1:
         if names[0] in delegates:
-            draw.text((x//2, y//2 + int(type_input.get())), "delegate", font=fonttype, fill=(204, 0, 0), anchor="mm")
+            draw.text((x//2, y//2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=(204, 0, 0), anchor="mm")
         elif names[0] in organizers:
-            draw.text((x//2, y//2 + int(type_input.get())), "organizer", font=fonttype, fill=(0, 153, 255), anchor="mm")
+            draw.text((x//2, y//2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=(0, 153, 255), anchor="mm")
         else:
-            draw.text((x//2, y//2 + int(type_input.get())), "competitor", font=fonttype, fill=(0, 204, 102), anchor="mm")
+            draw.text((x//2, y//2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=(0, 204, 102), anchor="mm")
     #preview
     img.show()
 
@@ -349,27 +367,27 @@ def export():
         #comp name
         if have_name_comp.get() == 1:
             colour = (int(comp_r.get()), int(comp_g.get()), int(comp_b.get()))
-            draw.text((x/2, y/2 + int(comp_input.get())), comp_name, font=fontmain, fill=colour, anchor="mm")
+            draw.text((x/2, y/2 + int(comp_input.get())), comp_name.upper(), font=fontmain, fill=colour, anchor="mm")
 
         #name
-        draw.text((x/2, y/2 + int(pers_input.get())), names[i], font=fontname, fill=(0, 0, 0), anchor="mm")
+        draw.text((x/2, y/2 + int(pers_input.get())), names[i].upper(), font=fontname, fill=(0, 0, 0), anchor="mm")
 
         #country text
         if country_c.get() == 1:
-            draw.text((x/2, y/2 + int(country_input.get())), countries[i], font=fontcountry, fill=(0, 0, 0), anchor="mm")
+            draw.text((x/2, y/2 + int(country_input.get())), countries[i].upper(), font=fontcountry, fill=(0, 0, 0), anchor="mm")
 
         #id
         if wcaid_c.get() == 1:
-            draw.text((x/2, y/2 + int(wcaid_input.get())), ids[i], font=fontid, fill=(0, 0, 0), anchor="mm")
+            draw.text((x/2, y/2 + int(wcaid_input.get())), ids[i].upper(), font=fontid, fill=(0, 0, 0), anchor="mm")
 
         #competitor, delegate or organizer
         if type_c.get() == 1:
             if names[i] in delegates:
-                draw.text((x/2, y/2 + int(type_input.get())), "delegate", font=fonttype, fill=(204, 0, 0), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=(204, 0, 0), anchor="mm")
             elif names[i] in organizers:
-                draw.text((x/2, y/2 + int(type_input.get())), "organizer", font=fonttype, fill=(0, 153, 255), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=(0, 153, 255), anchor="mm")
             else:
-                draw.text((x/2, y/2 + int(type_input.get())), "competitor", font=fonttype, fill=(0, 204, 102), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=(0, 204, 102), anchor="mm")
         
         filename = names[i].replace(" ", "")
         img.save(f"{filename}.png")
