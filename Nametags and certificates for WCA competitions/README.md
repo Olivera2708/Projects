@@ -4,19 +4,22 @@ Python scripts are used for WCA competition, first scrip is for generating certi
 
 ## HOW TO USE
 
+You need to have installed Python3 so you can run the script.
 You need to download nametag_gui.py, certificate_gui.py and requirements.txt and put them in the same folder.
 Add whatever font you like in the same folder as those three files (it needs to be .ttf).
 Add picture of name tag and certificate that you want to use for competition.
 
 Step 1
 Open terminal inside that folder and write:
-  _pip install -r requirements.txt_
+  > pip install -r requirements.txt
 
 Step 2
 Run one of the scripts
 (you can run it by using:
   > python3 nametag_gui.py
+  
   or
+  
   > python3 certificate_gui.py).
   
 Step 3
