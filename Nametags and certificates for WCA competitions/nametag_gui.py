@@ -4,7 +4,6 @@ import PIL.ImageFont
 from bs4 import BeautifulSoup
 import requests
 from tkinter import *
-import tkinter.font as tkf
 
 
 def show_example():
@@ -55,6 +54,7 @@ def button_export():
 def gui():
     global URL_input, image_input, font_input, comp_name, flag_c, country_c, wcaid_c, type_c, comp_input, comp_size, comp_b, comp_g, comp_r
     global pers_input, pers_size, flag_input_x, flag_input_y, country_input, country_size, wcaid_input, wcaid_size, type_input, type_size, have_name_comp
+    global pers_g, pers_r, pers_b, coun_b, coun_g, coun_r, type_r, type_g, type_b, wca_r, wca_g, wca_b, delegate_p, organizer_p, competitor_p
 
     window = Tk()
     window.title("WCA Name Tag Maker")
@@ -136,8 +136,23 @@ def gui():
     pers_size.grid(column=4, row=10)
     pers_size.insert(0, 150)
 
+    pers2_text = Label(text = "Name text color (R, G, B): ")
+    pers2_text.grid(column=1, row=11)
+
+    pers_r = Entry(width=10)
+    pers_r.grid(column=2, row=11)
+    pers_r.insert(0, 0)
+
+    pers_g = Entry(width=10)
+    pers_g.grid(column=3, row=11)
+    pers_g.insert(0, 0)
+
+    pers_b = Entry(width=10)
+    pers_b.grid(column=4, row=11)
+    pers_b.insert(0, 0)
+
     space2 = Label(text="")
-    space2.grid(column=1, row=11)
+    space2.grid(column=1, row=12)
 
     country_c = IntVar()
     flag_c = IntVar()
@@ -151,75 +166,139 @@ def gui():
     onvalue = 1, offvalue = 0)
     C4 = Checkbutton(text = "Competitor type", variable = type_c, \
                      onvalue = 1, offvalue = 0)
-    C1.grid(column=1, row=12)
-    C2.grid(column=1, row=13)
-    C3.grid(column=1, row=14)
-    C4.grid(column=1, row=15)
+    C1.grid(column=1, row=13)
+    C2.grid(column=1, row=14)
+    C3.grid(column=1, row=16)
+    C4.grid(column=1, row=18)
 
     flag_text = Label(text = "Flag position (x): ")
-    flag_text.grid(column=2, row=12)
+    flag_text.grid(column=2, row=13)
 
     flag_input_x = Entry(width=5)
-    flag_input_x.grid(column=3, row=12)
+    flag_input_x.grid(column=3, row=13)
     flag_input_x.insert(0, 0)
 
     flag_text = Label(text = "Flag position (y): ")
-    flag_text.grid(column=4, row=12)
+    flag_text.grid(column=4, row=13)
 
     flag_input_y = Entry(width=5)
-    flag_input_y.grid(column=5, row=12)
+    flag_input_y.grid(column=5, row=13)
     flag_input_y.insert(0, 100)
 
     country_text = Label(text = "Country name position: ")
-    country_text.grid(column=2, row=13)
+    country_text.grid(column=2, row=14)
 
     country_input = Entry(width=5)
-    country_input.grid(column=3, row=13)
+    country_input.grid(column=3, row=14)
     country_input.insert(0, 150)
 
     country_text1 = Label(text = "Country name size: ")
-    country_text1.grid(column=4, row=13)
+    country_text1.grid(column=4, row=14)
 
     country_size = Entry(width=5)
-    country_size.grid(column=5, row=13)
+    country_size.grid(column=5, row=14)
     country_size.insert(0, 120)
 
+    coun2_text = Label(text = "Country text color (R, G, B): ")
+    coun2_text.grid(column=1, row=15)
+
+    coun_r = Entry(width=10)
+    coun_r.grid(column=2, row=15)
+    coun_r.insert(0, 0)
+
+    coun_g = Entry(width=10)
+    coun_g.grid(column=3, row=15)
+    coun_g.insert(0, 0)
+
+    coun_b = Entry(width=10)
+    coun_b.grid(column=4, row=15)
+    coun_b.insert(0, 0)
+
     wcaid_text = Label(text = "WCA ID position: ")
-    wcaid_text.grid(column=2, row=14)
+    wcaid_text.grid(column=2, row=16)
 
     wcaid_input = Entry(width=5)
-    wcaid_input.grid(column=3, row=14)
+    wcaid_input.grid(column=3, row=16)
     wcaid_input.insert(0, 150)
 
     wcaid_text1 = Label(text = "WCA ID size: ")
-    wcaid_text1.grid(column=4, row=14)
+    wcaid_text1.grid(column=4, row=16)
 
     wcaid_size = Entry(width=5)
-    wcaid_size.grid(column=5, row=14)
+    wcaid_size.grid(column=5, row=16)
     wcaid_size.insert(0, 100)
 
+    wca2_text = Label(text = "WCA ID text color (R, G, B): ")
+    wca2_text.grid(column=1, row=17)
+
+    wca_r = Entry(width=10)
+    wca_r.grid(column=2, row=17)
+    wca_r.insert(0, 0)
+
+    wca_g = Entry(width=10)
+    wca_g.grid(column=3, row=17)
+    wca_g.insert(0, 0)
+
+    wca_b = Entry(width=10)
+    wca_b.grid(column=4, row=17)
+    wca_b.insert(0, 0)
+
     type_text = Label(text = "Competitor type position: ")
-    type_text.grid(column=2, row=15)
+    type_text.grid(column=2, row=18)
 
     type_input = Entry(width=5)
-    type_input.grid(column=3, row=15)
+    type_input.grid(column=3, row=18)
     type_input.insert(0, 350)
 
     type_text1 = Label(text = "Competitor type size: ")
-    type_text1.grid(column=4, row=15)
+    type_text1.grid(column=4, row=18)
 
     type_size = Entry(width=5)
-    type_size.grid(column=5, row=15)
+    type_size.grid(column=5, row=18)
     type_size.insert(0, 120)
 
+    type2_text = Label(text = "Competitor type text color (R, G, B): ")
+    type2_text.grid(column=1, row=19)
+
+    type_r = Entry(width=10)
+    type_r.grid(column=2, row=19)
+    type_r.insert(0, 0)
+
+    type_g = Entry(width=10)
+    type_g.grid(column=3, row=19)
+    type_g.insert(0, 0)
+
+    type_b = Entry(width=10)
+    type_b.grid(column=4, row=19)
+    type_b.insert(0, 0)
+
+    space3 = Label(text="")
+    space3.grid(column=1, row=20)
+
+    text123 = Label(text="Nametags for: ")
+    text123.grid(column=1, row=21)
+
+    delegate_p = IntVar()
+    organizer_p = IntVar()
+    competitor_p = IntVar()
+    C1 = Checkbutton(text = "Delegate", variable = delegate_p, \
+                     onvalue = 1, offvalue = 0)
+    C2 = Checkbutton(text = "Organizer", variable = organizer_p, \
+                     onvalue = 1, offvalue = 0)
+    C3 = Checkbutton(text = "Competitor", variable = competitor_p, \
+    onvalue = 1, offvalue = 0)
+    C1.grid(column=2, row=21)
+    C2.grid(column=3, row=21)
+    C3.grid(column=4, row=21)
+
     space2 = Label(text="")
-    space2.grid(column=1, row=16)
+    space2.grid(column=1, row=22)
 
     show_example_button = Button(text="Show example", command = show_example)
-    show_example_button.grid(column=2, row=19)
+    show_example_button.grid(column=2, row=23)
 
     export = Button(text="Export", command = button_export)
-    export.grid(column=3, row=19)
+    export.grid(column=3, row=23)
 
     window.mainloop()
 
@@ -321,24 +400,28 @@ def preview():
         draw.text((x//2, y//2 + int(comp_input.get())), comp_name.upper(), font=fontmain, fill=colour, anchor="mm")
 
     #name
-    draw.text((x//2, y//2 + int(pers_input.get())), names[0].upper(), font=fontname, fill=(0, 0, 0), anchor="mm")
+    colour = (int(pers_r.get()), int(pers_g.get()), int(pers_b.get()))
+    draw.text((x//2, y//2 + int(pers_input.get())), "JOHN DOE", font=fontname, fill=colour, anchor="mm")
 
     #country text
     if country_c.get() == 1:
-        draw.text((x//2, y//2 + int(country_input.get())), countries[0].upper(), font=fontcountry, fill=(0, 0, 0), anchor="mm")
+        colour = (int(coun_r.get()), int(coun_g.get()), int(coun_b.get()))
+        draw.text((x//2, y//2 + int(country_input.get())), countries[0].upper(), font=fontcountry, fill=colour, anchor="mm")
 
     #id
     if wcaid_c.get() == 1:
-        draw.text((x//2, y//2 + int(wcaid_input.get())), ids[0].upper(), font=fontid, fill=(0, 0, 0), anchor="mm")
+        colour = (int(wca_r.get()), int(wca_g.get()), int(wca_b.get()))
+        draw.text((x//2, y//2 + int(wcaid_input.get())), "2022ABC01", font=fontid, fill=colour, anchor="mm")
 
     #competitor, delegate or organizer
     if type_c.get() == 1:
-        if names[0] in delegates:
-            draw.text((x//2, y//2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=(204, 0, 0), anchor="mm")
-        elif names[0] in organizers:
-            draw.text((x//2, y//2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=(0, 153, 255), anchor="mm")
+        colour = (int(type_r.get()), int(type_g.get()), int(type_b.get()))
+        if delegate_p.get() == 1:
+            draw.text((x//2, y//2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=colour, anchor="mm")
+        elif organizer_p.get() == 1:
+            draw.text((x//2, y//2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=colour, anchor="mm")
         else:
-            draw.text((x//2, y//2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=(0, 204, 102), anchor="mm")
+            draw.text((x//2, y//2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=colour, anchor="mm")
     #preview
     img.show()
 
@@ -351,6 +434,13 @@ def export():
     fonttype = PIL.ImageFont.truetype(font, int(type_size.get()))
 
     for i in range(len(names)):
+        if delegate_p.get() == 1 and names[i] not in delegates:
+            continue
+        if organizer_p.get() == 1 and names[i] not in organizers:
+            continue
+        if competitor_p.get() == 1 and (names[i] in organizers or names[i] in delegates):
+            continue
+
         img = PIL.Image.open(image)
         x, y = img.size
 
@@ -370,24 +460,28 @@ def export():
             draw.text((x/2, y/2 + int(comp_input.get())), comp_name.upper(), font=fontmain, fill=colour, anchor="mm")
 
         #name
-        draw.text((x/2, y/2 + int(pers_input.get())), names[i].upper(), font=fontname, fill=(0, 0, 0), anchor="mm")
+        colour = (int(pers_r.get()), int(pers_g.get()), int(pers_b.get()))
+        draw.text((x/2, y/2 + int(pers_input.get())), names[i].upper(), font=fontname, fill=colour, anchor="mm")
 
         #country text
         if country_c.get() == 1:
-            draw.text((x/2, y/2 + int(country_input.get())), countries[i].upper(), font=fontcountry, fill=(0, 0, 0), anchor="mm")
+            colour = (int(coun_r.get()), int(coun_g.get()), int(coun_b.get()))
+            draw.text((x/2, y/2 + int(country_input.get())), countries[i].upper(), font=fontcountry, fill=colour, anchor="mm")
 
         #id
         if wcaid_c.get() == 1:
-            draw.text((x/2, y/2 + int(wcaid_input.get())), ids[i].upper(), font=fontid, fill=(0, 0, 0), anchor="mm")
+            colour = (int(wca_r.get()), int(wca_g.get()), int(wca_b.get()))
+            draw.text((x/2, y/2 + int(wcaid_input.get())), ids[i].upper(), font=fontid, fill=colour, anchor="mm")
 
         #competitor, delegate or organizer
         if type_c.get() == 1:
+            colour = (int(type_r.get()), int(type_g.get()), int(type_b.get()))
             if names[i] in delegates:
-                draw.text((x/2, y/2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=(204, 0, 0), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "DELEGATE", font=fonttype, fill=colour, anchor="mm")
             elif names[i] in organizers:
-                draw.text((x/2, y/2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=(0, 153, 255), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "ORGANIZER", font=fonttype, fill=colour, anchor="mm")
             else:
-                draw.text((x/2, y/2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=(0, 204, 102), anchor="mm")
+                draw.text((x/2, y/2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=colour, anchor="mm")
         
         filename = names[i].replace(" ", "")
         img.save(f"{filename}.png")
