@@ -29,7 +29,7 @@ Generated image should pop up.
 Change parameters as needed.
 
 ### Step 6
-When you are done press button "Export" and all the images will be exported to folder with scripts.
+When you are done press button "Export" and all images will be exported to the folder where the scripts are located.
 
 
 #### If something is not working check all parameters, because there is some invalid input.
