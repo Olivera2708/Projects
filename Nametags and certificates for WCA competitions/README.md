@@ -14,12 +14,7 @@ Open terminal inside that folder and write:
   `pip install -r requirements.txt`
 
 Step 2
-Run one of the scripts:
-  > python3 nametag_gui.py
-  
-  or
-  
-  > python3 certificate_gui.py
+Run one of the scripts with `python3 nametag_gui.py` or `python3 certificate_gui.py`.
   
 Step 3
 Enter competition name or if that does not work enter url of the competition.
