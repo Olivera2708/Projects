@@ -1,6 +1,6 @@
 ## About
 
-Python scripts are used for WCA competition, first scrip is for generating certificates, second script is for generating name tags.
+Python scripts for WCA competition, first script is for generating certificates, second script is for generating name tags.
 
 ## HOW TO USE
 
