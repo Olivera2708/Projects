@@ -8,26 +8,26 @@ Add picture of name tag and certificate that you want to use for competition.
 
 Step 1
 Open terminal inside that folder and write:
-  pip install -r requirements.txt
+  _pip install -r requirements.txt_
 
 Step 2
 Run one of the scripts
 (you can run it by using:
   _python3 nametag_gui.py_
   or
-  _python3 certificate_gui.py_)
+  _python3 certificate_gui.py_).
   
 Step 3
-Enter competition name or if that does not work enter url of the competition
-Enter your image name
-Enter font name
+Enter competition name or if that does not work enter url of the competition.
+Enter your image name.
+Enter font name.
 
 Step 4
-Click button "Show example"
-Generated image should pop up
+Click button "Show example".
+Generated image should pop up.
 
 Step 5
-Change all the parameters for your liking
+Change parameters as needed.
 
 Step 6
-When you are done press button "Export"
+When you are done press button "Export".
