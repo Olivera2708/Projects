@@ -4,7 +4,7 @@ Python scripts for WCA competition, first script is for generating certificates,
 
 ## HOW TO USE
 
-You need to have installed Python3 so you can run the script.
+You need to have installed Python 3 so you can run the script.
 You need to download nametag_gui.py, certificate_gui.py and requirements.txt and put them in the same folder.
 Add whatever font you like in the same folder as those three files (it needs to be .ttf).
 Add picture of name tag and certificate that you want to use for competition.
@@ -18,8 +18,8 @@ Run one of the scripts with `python3 nametag_gui.py` or `python3 certificate_gui
   
 ### Step 3
 Enter competition name or if that does not work enter url of the competition.
-Enter your image name.
-Enter font name.
+Enter your image name (with extension).
+Enter font name (with extension).
 
 ### Step 4
 Click button "Show example".
