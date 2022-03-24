@@ -47,7 +47,7 @@ def button_export():
 
 
 def gui():
-    global URL_input, image_input, font_input, check_national, title_input, general_input, event_input, nat_input, title_size, general_size, event_size, place_size, place_input
+    global URL_input, image_input, font_input, check_national, title_input, general_input, event_input, nat_input, title_size, general_size, event_size, place_size, place_input, have_name_comp
 
     window = Tk()
     window.title("WCA Certificate Maker")
@@ -60,8 +60,10 @@ def gui():
     space = Label(text="")
     space.grid(column=1, row=2)
 
-    URL_text = Label(text = "Competition name or url: ")
-    URL_text.grid(column=1, row=3)
+    have_name_comp = IntVar()
+    C6 = Checkbutton(text = "Competition name or url: ", variable = have_name_comp, \
+                     onvalue = 1, offvalue = 0)
+    C6.grid(column=1, row=3)
 
     URL_input = Entry(width=30)
     URL_input.grid(column=2, row=3, columnspan=2)
@@ -282,7 +284,10 @@ def preview():
         x, y = img.size
         num = "1ST"
         event_text = f"HAS PLACED {num} AT THE EVENT OF {events[0]}"
-        draw.text((x/2, y/2 + int(title_input.get())), comp_name.upper(), font=fontmain, fill=(0, 0, 0), anchor="mm")
+
+        if have_name_comp.get() == 1:
+            draw.text((x/2, y/2 + int(title_input.get())), comp_name.upper(), font=fontmain, fill=(0, 0, 0), anchor="mm")
+
         draw.text((x/2, y/2 + int(general_input.get())), general_text.upper(), font=fonttext, fill=(0, 0, 0), anchor="mm", align="center")
 
         if not nat_input.get():
@@ -311,7 +316,9 @@ def export():
             else:
                 num = "3RD"
             event_text = f"HAS PLACED {num} AT THE EVENT OF {event}"
-            draw.text((x/2, y/2 + int(title_input.get())), comp_name.upper(), font=fontmain, fill=(0, 0, 0), anchor="mm")
+            if have_name_comp.get() == 1:
+                draw.text((x/2, y/2 + int(title_input.get())), comp_name.upper(), font=fontmain, fill=(0, 0, 0), anchor="mm")
+                
             draw.text((x/2, y/2 + int(general_input.get())), general_text.upper(), font=fonttext, fill=(0, 0, 0), anchor="mm", align="center")
             draw.text((x/2, y/2 + int(event_input.get())), event_text.upper(), font=fontevent, fill=(0, 0, 0), anchor="mm")
 
