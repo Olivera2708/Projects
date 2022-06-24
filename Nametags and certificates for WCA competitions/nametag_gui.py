@@ -484,6 +484,6 @@ def export():
                 draw.text((x/2, y/2 + int(type_input.get())), "COMPETITOR", font=fonttype, fill=colour, anchor="mm")
         
         filename = names[i].replace(" ", "")
-        img.save(f"{filename}.png")
+        img.save(f"{filename}.png", dpi=(300,300))
 
 gui()

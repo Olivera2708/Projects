@@ -332,6 +332,6 @@ def export():
                 draw.text((x/2, y/2 + int(place_input.get())), place.upper(), font=fontplace, fill=(0, 0, 0), anchor="mm")
 
             filename = event.replace(" ", "")
-            img.save(f"{i}_{filename}.png")
+            img.save(f"{i}_{filename}.png", dpi=(300, 300))
 
 gui()
