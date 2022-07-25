@@ -401,7 +401,7 @@ def preview():
 
     #name
     colour = (int(pers_r.get()), int(pers_g.get()), int(pers_b.get()))
-    draw.text((x//2, y//2 + int(pers_input.get())), "JOHN DOE", font=fontname, fill=colour, anchor="mm")
+    draw.text((x//2, y//2 + int(pers_input.get())), "John Doe", font=fontname, fill=colour, anchor="mm")
 
     #country text
     if country_c.get() == 1:
@@ -461,7 +461,12 @@ def export():
 
         #name
         colour = (int(pers_r.get()), int(pers_g.get()), int(pers_b.get()))
-        draw.text((x/2, y/2 + int(pers_input.get())), names[i].upper(), font=fontname, fill=colour, anchor="mm")
+        until = names[i].find("（");
+        if until == -1:
+            name_surname = names[i];
+        else:
+            name_surname = names[i][:until]
+        draw.text((x/2, y/2 + int(pers_input.get())), name_surname, font=fontname, fill=colour, anchor="mm") #.upper()
 
         #country text
         if country_c.get() == 1:
