@@ -320,7 +320,6 @@ def export():
                 draw.text((x/2, y/2 + int(title_input.get())), comp_name.upper(), font=fontmain, fill=(0, 0, 0), anchor="mm")
                 
             draw.text((x/2, y/2 + int(general_input.get())), general_text.upper(), font=fonttext, fill=(0, 0, 0), anchor="mm", align="center")
-            draw.text((x/2, y/2 + int(event_input.get())), event_text.upper(), font=fontevent, fill=(0, 0, 0), anchor="mm")
 
             if not nat_input.get():
                 draw.text((x/2, y/2 + int(place_input.get())), place.upper(), font=fontplace, fill=(0, 0, 0), anchor="mm")
