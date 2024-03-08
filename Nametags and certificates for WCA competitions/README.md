@@ -47,7 +47,12 @@ When you are done press button "Export" and all images will be exported to the f
 
 ## Certificate generator
 
-![Preview](images/certificate_generator.png)
-*Image Description*: This image shows the user interface of the Certificate Generator tool, which allows users to customize and generate certificates for a competition.
-![Preview](images/certificate_example.png)
-*Image Description*: This image shows a preview of generated certificate.
+
+| ![Preview](images/certificate_generator.png) | 
+|:--:| 
+| *User interface of the Certificate Generator tool, which allows users to customize and generate certificates for a competition* |
+
+
+| ![Preview](images/certificate_example.png) | 
+|:--:| 
+| *Preview of a generated certificate* |
