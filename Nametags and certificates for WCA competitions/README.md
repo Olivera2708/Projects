@@ -36,7 +36,8 @@ When you are done press button "Export" and all images will be exported to the f
 # Preview
 ## Nametag generator
 
-![Preview](images/nametag_generator.png "User interface of the Nametag Generator tool, which allows users to customize and generate name tags for a competition")
+![Preview](images/nametag_generator.png)
+*User interface of the Nametag Generator tool, which allows users to customize and generate name tags for a competition*
 ![Preview](images/nametag_example.png)
 *Image Description*: This image shows a preview of generated nametag.
 
