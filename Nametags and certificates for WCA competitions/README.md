@@ -1,4 +1,4 @@
-## About
+# About
 
 Python scripts for WCA competition, first script is for generating certificates, second script is for generating name tags.
 
@@ -32,3 +32,18 @@ When you are done press button "Export" and all images will be exported to the f
 
 
 #### If something is not working check all parameters, because there is some invalid input.
+
+# Preview
+## Nametag generator
+
+![Preview](images/nametag_generator.png)
+*Image Description*: This image shows the user interface of the Nametag Generator tool, which allows users to customize and generate name tags for a competition.
+![Preview](images/nametag_example.png)
+*Image Description*: This image shows a preview of generated nametag.
+
+## Certificate generator
+
+![Preview](images/certificate_generator.png)
+*Image Description*: This image shows the user interface of the Certificate Generator tool, which allows users to customize and generate certificates for a competition.
+![Preview](images/certificate_example.png)
+*Image Description*: This image shows a preview of generated certificate.
